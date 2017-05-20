@@ -3,9 +3,12 @@ from bs4 import BeautifulSoup
 
 url='https://in.bookmyshow.com/manipal/movies'
 response=requests.get(url)
-html=response.content
+html=response.content	
 
 soup = BeautifulSoup(html,"lxml")
-x= soup.find_all('a',class_="__movie-name")
+
+print "\nCurrent Movies\n"
+x= soup.find_all('div',class_="detail")
 for row in x:
-	print row.string
+	if len(row['class'])==1:
+		print row.div.a.string
